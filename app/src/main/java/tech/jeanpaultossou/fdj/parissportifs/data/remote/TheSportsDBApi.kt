@@ -1,10 +1,8 @@
 package tech.jeanpaultossou.fdj.parissportifs.data.remote
 
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Query
 import tech.jeanpaultossou.fdj.parissportifs.core.Constants
-import tech.jeanpaultossou.fdj.parissportifs.data.remote.dto.LeagueDto
 import tech.jeanpaultossou.fdj.parissportifs.data.remote.dto.LeagueListDto
 import tech.jeanpaultossou.fdj.parissportifs.data.remote.dto.TeamDto
 import tech.jeanpaultossou.fdj.parissportifs.data.remote.dto.TeamListDto
