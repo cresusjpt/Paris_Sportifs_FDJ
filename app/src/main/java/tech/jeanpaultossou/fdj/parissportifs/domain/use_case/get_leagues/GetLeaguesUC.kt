@@ -16,7 +16,7 @@ import kotlin.math.log
 class GetLeaguesUC @Inject constructor(
     private val repository: LeagueRepository
 ) {
-    //in replace of an execute method
+    //similar to the traditional execute method
     operator fun invoke():Flow<Resource<List<League>>> = flow {
         try {
             emit(Resource.Loading())

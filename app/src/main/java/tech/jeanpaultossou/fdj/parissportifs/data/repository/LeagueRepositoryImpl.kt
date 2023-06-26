@@ -10,6 +10,8 @@ import javax.inject.Inject
 class LeagueRepositoryImpl @Inject constructor(
     private val api: TheSportsDBApi
 ):LeagueRepository {
+
+
     override suspend fun getLeagues(): LeagueListDto {
         return api.getLeagues()
     }

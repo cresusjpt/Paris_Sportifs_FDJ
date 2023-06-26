@@ -2,7 +2,7 @@ package tech.jeanpaultossou.fdj.parissportifs.domain.model
 
 import coil.request.ImageRequest
 
-data class Team (
+data class Team(
     val idLeague: String,
     val idLeague2: String?,
     val idLeague3: String?,
@@ -38,10 +38,23 @@ data class Team (
     val strTwitter: String?,
     val strWebsite: String?,
     val strYoutube: String?,
-    var teamImage:ImageRequest?
+    var teamImage: ImageRequest?
 
-):Comparable<Team>{
+
+) : Comparable<Team> {
     override fun compareTo(other: Team): Int {
         return this.strTeam compareTo other.strTeam
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (other == null) return false
+        if (this === other) return true
+        if (other !is Team) return false
+        if (strTeam != other.strTeam || strLeague!=other.strLeague) return false
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return super.hashCode()
     }
 }

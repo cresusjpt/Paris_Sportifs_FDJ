@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import tech.jeanpaultossou.fdj.parissportifs.core.Constants
 import tech.jeanpaultossou.fdj.parissportifs.core.Resource
+import tech.jeanpaultossou.fdj.parissportifs.domain.model.Team
 import tech.jeanpaultossou.fdj.parissportifs.domain.use_case.get_teams.GetTeamsUC
 import javax.inject.Inject
 
@@ -37,6 +38,13 @@ class TeamListViewModel @Inject constructor(
         }
     }
 
+    fun getImage(team: Team, context: Context): ImageRequest{
+        return ImageRequest.Builder(context = context)
+            .data(team.strTeamBadge)
+            .allowHardware(false) // Disable hardware bitmaps.
+            .build()
+    }
+
     private fun getTeams(leagueName: String, context: Context) {
         getTeamsUC(leagueName).onEach { res ->
             when (res) {
@@ -53,17 +61,8 @@ class TeamListViewModel @Inject constructor(
                 is Resource.Success -> {
                     val teams = res.data ?: emptyList()
                     teams.map {
-
-                        val request = ImageRequest.Builder(context)
-                            .data(it.strTeamBadge)
-                            .allowHardware(false) // Disable hardware bitmaps.
-                            .build()
-                        it.teamImage = request
+                        it.teamImage = getImage(it, context)
                     }
-
-                    //val loader = ImageLoader(context)
-                    //val result = (loader.execute(request) as SuccessResult).drawable
-                    //val bitmap = (result as BitmapDrawable).bitmap
                     _teamListState.value = TeamListState(teams = teams)
                 }
             }

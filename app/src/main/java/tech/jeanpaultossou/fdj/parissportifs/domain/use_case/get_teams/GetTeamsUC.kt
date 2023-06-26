@@ -13,17 +13,18 @@ import javax.inject.Inject
 class GetTeamsUC @Inject constructor(
     private val repository: TeamRepository
 ) {
-    operator fun invoke(leagueName: String): Flow<Resource<List<Team>>> = flow{
+    operator fun invoke(leagueName: String): Flow<Resource<List<Team>>> = flow {
         try {
             emit(Resource.Loading())
             //order descending and get 1/2 of teams in the league
-            val teams = repository.getTeams(leagueName).teamDto.map { it.toTeam() }.filterIndexed { index, team ->
-                index%2==0
-            }
+            val teams = repository.getTeams(leagueName).teamDto.map { it.toTeam() }
+                .filterIndexed { index, _ ->
+                    index % 2 == 0
+                }
             emit(Resource.Success(teams.sortedDescending()))
-        }catch (httpE:HttpException){
+        } catch (httpE: HttpException) {
             emit(Resource.Error(httpE.localizedMessage ?: "Erreur de chargment"))
-        }catch (e: IOException){
+        } catch (e: IOException) {
             emit(Resource.Error("Vérifiez la connxion internet et réessayez svp."))
         }
 
