@@ -9,7 +9,6 @@ import org.junit.Before
 import org.junit.Test
 import tech.jeanpaultossou.fdj.parissportifs.data.remote.dto.toLeague
 import tech.jeanpaultossou.fdj.parissportifs.data.repository.FakeForTestLeagueRepositoryImpl
-import tech.jeanpaultossou.fdj.parissportifs.presentation.league_list.LeagueListViewModel
 
 class GetLeaguesUCTest {
 
